@@ -62,3 +62,4 @@ http://localhost:3000
 ## To Do
 
 - Customize bombs and size
+- Include sounds and animations
