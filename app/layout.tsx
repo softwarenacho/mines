@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.scss';
 
-const APP_NAME = 'mines';
+const APP_NAME = 'Mines';
 const APP_DEFAULT_TITLE = 'Mines Game';
 const APP_DESCRIPTION = 'Minesweeper clone on PWA';
 

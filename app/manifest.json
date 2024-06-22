@@ -1,6 +1,6 @@
 {
   "name": "Mines Game",
-  "short_name": "mines-name",
+  "short_name": "Mines",
   "id": "mines-name",
   "description": "Minesweeper clone on PWA",
   "display": "standalone",
