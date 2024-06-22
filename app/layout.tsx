@@ -1,10 +1,9 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.scss';
 
-const APP_NAME = 'pwa-next-template';
-const APP_DEFAULT_TITLE = 'PWA Next.js template';
-const APP_DESCRIPTION =
-  'Next.js template with PWA integrated and scoring average 100';
+const APP_NAME = 'mines';
+const APP_DEFAULT_TITLE = 'Mines Game';
+const APP_DESCRIPTION = 'Minesweeper clone on PWA';
 
 export const metadata: Metadata = {
   title: APP_NAME,
@@ -21,7 +20,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#a6d6d8',
+  themeColor: '#6692b1',
   minimumScale: 1,
   initialScale: 1,
 };
