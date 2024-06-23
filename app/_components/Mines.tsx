@@ -214,6 +214,7 @@ const Mines = () => {
   const resetGame = () => {
     initializeBoard();
     startTimer();
+    setModal(false);
   };
 
   const renderBoard = () => {
