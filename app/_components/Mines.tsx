@@ -13,9 +13,11 @@ interface Cell {
 }
 
 const Mines = () => {
+  const [tileSize, setTileSize] = useState<number>(30);
   const [board, setBoard] = useState<Cell[][]>([]);
   const [gameOver, setGameOver] = useState(false);
   const [gameWon, setGameWon] = useState(false);
+  const [modal, setModal] = useState(false);
   const [time, setTime] = useState(0);
   const [flags, setFlags] = useState(MINE_COUNT);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
@@ -31,6 +33,7 @@ const Mines = () => {
   useEffect(() => {
     if (gameOver || gameWon) {
       stopTimer();
+      setModal(true);
     }
   }, [gameOver, gameWon]);
 
@@ -224,6 +227,11 @@ const Mines = () => {
             }`}
             onClick={() => handleCellClick(rowIndex, colIndex)}
             onContextMenu={(e) => handleRightClick(e, rowIndex, colIndex)}
+            style={{
+              width: `${tileSize}px`,
+              height: `${tileSize}px`,
+              fontSize: `${tileSize - 10}px`,
+            }}
           >
             {cell.isOpen && !cell.isMine && cell.count > 0 && cell.count}
             {cell.isOpen && cell.isMine && (
@@ -231,8 +239,8 @@ const Mines = () => {
                 <Image
                   src='/icons/bomb.webp'
                   alt='Bomb'
-                  width={20}
-                  height={20}
+                  width={tileSize * 0.75}
+                  height={tileSize * 0.75}
                 />
               </span>
             )}
@@ -241,8 +249,8 @@ const Mines = () => {
                 <Image
                   src='/icons/flag.webp'
                   alt='Flag'
-                  width={20}
-                  height={20}
+                  width={tileSize * 0.75}
+                  height={tileSize * 0.75}
                 />
               </span>
             )}
@@ -260,41 +268,103 @@ const Mines = () => {
           <span>
             <i>Bombs:</i> <b>{flags}</b>
           </span>
-          {gameOver && (
+          <div className={styles.face}>
             <Image
-              src='/icons/lost.webp'
-              alt='Sad Face'
+              className={styles.wink}
+              src='/icons/wink.webp'
+              alt='Wink Face'
               width={32}
               height={32}
             />
-          )}
-          {!(gameWon || gameOver) && (
-            <Image
-              src='/icons/idle.webp'
-              alt='Smile Face'
-              width={32}
-              height={32}
-            />
-          )}
-          {gameWon && (
-            <Image
-              src='/icons/won.webp'
-              alt='Happy Face'
-              width={32}
-              height={32}
-            />
-          )}
+            {!modal && (gameOver || gameWon) && (
+              <Image
+                className={styles.other}
+                src='/icons/wink.webp'
+                alt='Wink Face'
+                width={32}
+                height={32}
+              />
+            )}
+            {modal && gameOver && (
+              <Image
+                className={styles.other}
+                src='/icons/lost.webp'
+                alt='Sad Face'
+                width={32}
+                height={32}
+              />
+            )}
+            {!(gameWon || gameOver) && (
+              <Image
+                className={styles.other}
+                src='/icons/idle.webp'
+                alt='Smile Face'
+                width={32}
+                height={32}
+              />
+            )}
+            {modal && gameWon && (
+              <Image
+                className={styles.other}
+                src='/icons/won.webp'
+                alt='Happy Face'
+                width={32}
+                height={32}
+              />
+            )}
+          </div>
           <span>
             <i>Time:</i> <b>{time}</b>
           </span>
         </div>
       </div>
       <div className={styles.board}>{renderBoard()}</div>
+      <div className={styles.zoom}>
+        <div
+          onClick={() => tileSize > 15 && setTileSize(tileSize - 5)}
+          style={{
+            visibility: tileSize > 15 ? 'visible' : 'hidden',
+          }}
+        >
+          <Image
+            src='/icons/minus.webp'
+            alt='Zoom out'
+            width={32}
+            height={32}
+          />
+        </div>
+        <div
+          onClick={() => tileSize < 60 && setTileSize(tileSize + 5)}
+          style={{
+            visibility: tileSize < 60 ? 'visible' : 'hidden',
+          }}
+        >
+          <Image src='/icons/plus.webp' alt='Zoom in' width={32} height={32} />
+        </div>
+      </div>
       <button className={styles.button} onClick={resetGame}>
-        Reset Game
+        <Image
+          src='/icons/reset.webp'
+          alt='Reset Game'
+          width={32}
+          height={32}
+        />
       </button>
-      {(gameOver || gameWon) && (
+      {modal && (
         <div className={styles.modal}>
+          <span
+            className={styles.close}
+            onClick={() => {
+              setModal(false);
+            }}
+          >
+            <Image
+              src='/icons/close.webp'
+              alt='Close modal'
+              width={16}
+              height={16}
+            />
+          </span>
           {gameOver && (
             <div className={styles.message}>Game Over! Try Again.</div>
           )}

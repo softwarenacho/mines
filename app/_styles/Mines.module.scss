@@ -12,10 +12,10 @@
   border-radius: 1rem;
   border: 1px solid #6692b1;
   padding: 2rem;
-  box-shadow: 2px 2px 2px #808080;
+  box-shadow: 2px 2px 2px black;
   &:hover {
     backdrop-filter: blur(0.5rem) saturate(200%);
-    box-shadow: 4px 4px 4px #808080;
+    box-shadow: 4px 4px 4px black;
     border: 2px solid #6692b166;
   }
   @media screen and (min-width: 600px) {
@@ -48,13 +48,28 @@
   gap: 1rem;
   img {
     margin: 0 1rem;
-    filter: drop-shadow(2px 2px 2px #808080);
+    filter: drop-shadow(2px 2px 2px black);
   }
   span {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+  }
+}
+
+.face {
+  .wink {
+    display: none;
+  }
+  .other {
+    display: flex;
+  }
+  &:hover .wink {
+    display: flex;
+  }
+  &:hover .other {
+    display: none;
   }
 }
 
@@ -68,9 +83,9 @@
   border-radius: 5px;
   overflow: hidden;
   width: min-content;
-  box-shadow: 2px 2px 2px #808080;
+  box-shadow: 2px 2px 2px black;
   &:hover {
-    box-shadow: 4px 4px 4px #808080;
+    box-shadow: 4px 4px 4px black;
   }
 }
 
@@ -79,8 +94,6 @@
 }
 
 .cell {
-  width: 30px;
-  height: 30px;
   background-color: #7697b6;
   border: 1px solid #3d41ab80;
   display: flex;
@@ -90,12 +103,11 @@
   user-select: none;
   position: relative;
   font-weight: bold;
-  font-size: 16px;
   img {
     display: flex;
     justify-content: center;
     align-items: center;
-    filter: drop-shadow(2px 2px 2px #808080);
+    filter: drop-shadow(2px 2px 2px black);
   }
 }
 
@@ -110,6 +122,7 @@
 .cell.mine {
   background-color: #800f0f;
   color: #f4d2d2;
+  filter: drop-shadow(2px 2px 2px #800f0f);
 }
 
 .message {
@@ -125,6 +138,14 @@
   -webkit-text-fill-color: transparent;
 }
 
+.close {
+  color: #d31b1b;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  cursor: pointer;
+}
+
 .won {
   background-image: -webkit-linear-gradient(
     60deg,
@@ -137,20 +158,26 @@
 }
 
 .button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 2rem;
-  padding: 1rem 2rem;
+  padding: 1rem;
   cursor: pointer;
-  border-radius: 0.5rem;
-  color: #808080;
+  border-radius: 50%;
   background-color: #6692b180;
-  border: 2px solid #808080;
-  font-weight: bold;
-  box-shadow: 2px 2px 2px #808080;
+  border: 1px solid black;
+  box-shadow: 1px 1px 1px black;
+  img {
+    filter: drop-shadow(2px 2px 0px #217621);
+  }
   &:hover {
-    box-shadow: 4px 4px 4px #808080;
-    border: 2px solid #f4d2d2;
-    color: #f4d2d2;
     background-color: #6692b1;
+    border: 1px solid #f4d2d2;
+    box-shadow: 2px 2px 2px black;
+    img {
+      filter: drop-shadow(-2px -2px 0px #d31b1b);
+    }
   }
 }
 
@@ -165,8 +192,28 @@
   backdrop-filter: blur(0.25rem) saturate(200%);
   background-color: #0889acbf;
   border-radius: 0.5rem;
-  box-shadow: 2px 2px 2px #808080;
+  box-shadow: 2px 2px 2px black;
   &:hover {
-    box-shadow: 4px 4px 4px #808080;
+    box-shadow: 4px 4px 4px black;
+  }
+}
+
+.zoom {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 2rem;
+  div {
+    cursor: pointer;
+    img {
+      filter: drop-shadow(1px 1px 0px black);
+      &:hover {
+        filter: drop-shadow(-1px -1px 0px black);
+      }
+    }
   }
 }
